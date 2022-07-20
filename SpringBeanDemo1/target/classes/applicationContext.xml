@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="bookDao" class="com.xjtu.dao.impl.BookDaoImpl" init-method="init" destroy-method="destroy">
+        <property name="connectionNum" value="10"/>
+        <property name="databaseName" value="mysql"/>
+    </bean>
+
+    <bean id="bookService" class="com.xjtu.service.impl.BookServiceImpl">
+        <property name="bookDao" ref="bookDao"/>
+    </bean>
+
+    <bean id="bookService2" class="com.xjtu.service.impl.BookServiceImpl2">
+        <constructor-arg name="bookDao" ref="bookDao"/>
+        <constructor-arg name="description" value="haha"/>
+    </bean>
+
+    <bean id="orderDao" class="com.xjtu.dao.factory.OrderDaoFactory" factory-method="getOrderDao"/>
+
+    <bean id="userFactory" class="com.xjtu.dao.factory.UserDaoFactory"/>
+<!--    <bean id="userDao" factory-bean="userFactory" factory-method="getUserDao"/>-->
+
+    <bean id="userDao" class="com.xjtu.dao.factory.UserDaoFactoryBean"/>
+
+</beans>
