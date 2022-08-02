@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.BookDao">
+
+
+    <insert id="save">
+        insert into tbl_book values(null, #{type}, #{name}, #{description});
+    </insert>
+
+    <update id="update">
+        update tbl_book set type = #{type}, name = #{name}, description = #{description} where id = #{id};
+    </update>
+
+    <delete id="delete">
+        delete from tbl_book where id = #{id};
+    </delete>
+
+    <select id="getById" resultType="com.example.domain.Book">
+        select * from tbl_book where id = #{id};
+    </select>
+    <select id="getAll" resultType="com.example.domain.Book">
+        select * from tbl_book;
+    </select>
+
+
+</mapper>
